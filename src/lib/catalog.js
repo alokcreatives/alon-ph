@@ -4,9 +4,12 @@
  * works out of the box.
  */
 
+const clean = (v) => (v == null ? v : String(v).trim().replace(/^["']|["']$/g, ""));
+// Trim whitespace/quotes so a slightly messy GitHub secret (trailing space,
+// newline, or pasted with quotes) still works.
+const SHEET_ID = clean(process.env.SHEET_ID);
+const SHEET_API_KEY = clean(process.env.SHEET_API_KEY);
 const {
-  SHEET_ID,
-  SHEET_API_KEY,
   TAB_CATEGORIES = "Categories",
   TAB_PRODUCTS = "Products",
   TAB_VARIANTS = "Variants",
@@ -218,7 +221,19 @@ export async function getCatalog() {
     cache = { ...assemble(cats, prods, vars, servs, homeRows), usingSample: false };
     return cache;
   } catch (err) {
-    console.error("[catalog] Sheet fetch failed, using sample data:", err.message);
+    // A key WAS provided, so we were meant to use the real sheet. During a
+    // production build, fail loudly instead of silently shipping sample data
+    // (that's how a bad/whitespace-y secret slips through unnoticed).
+    if (process.env.NODE_ENV === "production" || process.env.CI) {
+      console.error("[catalog] Sheet fetch FAILED with a key present — refusing to build sample data.");
+      console.error("[catalog]", err.message);
+      throw new Error(
+        `Sheet fetch failed during build: ${err.message}\n` +
+        `Check the SHEET_ID and SHEET_API_KEY secrets on GitHub (no quotes/spaces), ` +
+        `and that the sheet is shared "Anyone with the link — Viewer".`
+      );
+    }
+    console.error("[catalog] Sheet fetch failed, using sample data (dev):", err.message);
     cache = { ...normalizeSample(SAMPLE), usingSample: true, error: err.message };
     return cache;
   }
