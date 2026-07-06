@@ -18,7 +18,15 @@ for (const [k, v] of Object.entries(env)) {
 //   - User site     (https://<user>.github.io/):            SITE_URL=https://<user>.github.io, BASE_PATH=/
 //   - Custom domain (https://alonph.com/):                  SITE_URL=https://alonph.com,        BASE_PATH=/
 const site = process.env.SITE_URL || undefined;
-const base = process.env.BASE_PATH || "/";
+
+// Normalize BASE_PATH so it ALWAYS has leading + trailing slashes.
+// Accepts "alon-ph", "/alon-ph", or "/alon-ph/" — all become "/alon-ph/".
+// (Without the trailing slash, links render glued: /alon-phcatalog/.)
+function normalizeBase(v) {
+  if (!v || v === "/") return "/";
+  return "/" + String(v).trim().replace(/^\/+|\/+$/g, "") + "/";
+}
+const base = normalizeBase(process.env.BASE_PATH);
 
 export default defineConfig({
   site,
