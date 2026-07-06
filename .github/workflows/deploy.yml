@@ -50,11 +50,8 @@ jobs:
           SHEET_ID: ${{ secrets.SHEET_ID }}
           SHEET_API_KEY: ${{ secrets.SHEET_API_KEY }}
           INQUIRY_EMAIL: ${{ secrets.INQUIRY_EMAIL }}
-          TAB_CATEGORIES: ${{ secrets.TAB_CATEGORIES }}
-          TAB_PRODUCTS: ${{ secrets.TAB_PRODUCTS }}
-          TAB_VARIANTS: ${{ secrets.TAB_VARIANTS }}
-          TAB_SERVICES: ${{ secrets.TAB_SERVICES }}
-          TAB_HOME: ${{ secrets.TAB_HOME }}
+          # Tab names use built-in defaults (Categories/Products/Variants/Services/Home).
+          # Only add TAB_* secrets if your sheet tabs are named differently.
           SITE_URL: ${{ vars.SITE_URL }}
           BASE_PATH: ${{ vars.BASE_PATH }}
         run: npm run build

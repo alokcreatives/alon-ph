@@ -9,13 +9,16 @@ const clean = (v) => (v == null ? v : String(v).trim().replace(/^["']|["']$/g, "
 // newline, or pasted with quotes) still works.
 const SHEET_ID = clean(process.env.SHEET_ID);
 const SHEET_API_KEY = clean(process.env.SHEET_API_KEY);
-const {
-  TAB_CATEGORIES = "Categories",
-  TAB_PRODUCTS = "Products",
-  TAB_VARIANTS = "Variants",
-  TAB_SERVICES = "Services",
-  TAB_HOME = "Home",
-} = process.env;
+
+// Tab names: use the env value ONLY if it's non-empty, else the default.
+// (CI can pass an empty string from an unset secret — `= default` in
+//  destructuring only applies to `undefined`, not "", so guard explicitly.)
+const tab = (v, fallback) => (clean(v) || fallback);
+const TAB_CATEGORIES = tab(process.env.TAB_CATEGORIES, "Categories");
+const TAB_PRODUCTS = tab(process.env.TAB_PRODUCTS, "Products");
+const TAB_VARIANTS = tab(process.env.TAB_VARIANTS, "Variants");
+const TAB_SERVICES = tab(process.env.TAB_SERVICES, "Services");
+const TAB_HOME = tab(process.env.TAB_HOME, "Home");
 
 // A URL-safe slug for detail pages.
 function slugify(s) {
