@@ -280,9 +280,13 @@ const HOME_DEFAULTS = {
   // Default email comes from the INQUIRY_EMAIL secret so the whole site (contact
   // links, footer, inquiry send) uses one address. A Home-tab `contact_email`
   // row still overrides this if set.
-  contact_email: clean(process.env.INQUIRY_EMAIL) || "hello@example.com",
-  contact_phone: "0977 123 4567",
+  contact_email: clean(process.env.INQUIRY_EMAIL) || "alokcreationsofficial@gmail.com",
+  contact_phone: "0991 725 0311",
   contact_location: "Daraga, Albay, Philippines",
+  tagline: "Bright creation for chosen moments",
+  facebook_url: "https://www.facebook.com/profile.php?id=61583953806189",
+  instagram_url: "",
+  youtube_url: "",
 };
 
 // ---------- sample fallback (mirrors your real catalog shape) ----------
