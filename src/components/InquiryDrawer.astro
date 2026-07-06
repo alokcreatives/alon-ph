@@ -30,6 +30,7 @@ const minimums = Object.fromEntries(products.flatMap((p) => p.variants.map((v) =
 <script is:inline set:html={`window.__INQUIRY_MINIMUMS__ = ${JSON.stringify(minimums)}; window.__INQUIRY_EMPTY_ICON__ = ${JSON.stringify(uiIcon("receipt", 44))};`} />
 <script>
   import { getItems, saveItems, removeItem, setQty, clear } from "../scripts/inquiry.js";
+  import { sendInquiry } from "../scripts/send-inquiry.js";
   const email = window.__INQUIRY_EMAIL__;
   const minimums = window.__INQUIRY_MINIMUMS__ || {};
   const drawer = document.querySelector("#inquiry-drawer");
@@ -127,12 +128,7 @@ const minimums = Object.fromEntries(products.flatMap((p) => p.variants.map((v) =
   clearBtn.addEventListener("click", () => { clear(); render(); });
 
   sendBtn.addEventListener("click", () => {
-    const items = getItems();
-    if (!items.length) return;
-    const lines = ["Hi ALON-PH,", "", "I'd like to request a quotation for the following:", ""];
-    items.forEach((it, i) => lines.push(`${i + 1}. ${it.productName}${it.variantName ? " — " + it.variantName : ""}`, `   Qty: ${it.qty}${it.note ? "\n   Note: " + it.note : ""}`));
-    lines.push("", "Name: ", "Organization: ", "Contact number: ", "Event / needed by: ", "", "Thank you!");
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent("ALON-PH inquiry — quotation request")}&body=${encodeURIComponent(lines.join("\n"))}`;
+    sendInquiry(email, getItems());
   });
 
   // Open automatically right after an item is added (nice feedback), and keep in sync.

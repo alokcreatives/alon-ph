@@ -66,6 +66,7 @@ for (const s of services) {
 <script is:inline set:html={`window.__INQ__ = ${JSON.stringify({ email: inquiryEmail, meta, icons: { note: uiIcon("note", 14), package: uiIcon("package", 25) } })};`} />
 <script>
   import { getItems, saveItems, removeItem, setQty, clear } from "../scripts/inquiry.js";
+  import { sendInquiry } from "../scripts/send-inquiry.js";
   const { email, meta, icons } = window.__INQ__;
   const wrap = document.querySelector("#items");
   const empty = document.querySelector("#empty");
@@ -128,12 +129,7 @@ for (const s of services) {
 
   document.querySelector("#clear").addEventListener("click", () => { clear(); render(); });
   document.querySelector("#send").addEventListener("click", () => {
-    const items = getItems();
-    if (!items.length) return;
-    const lines = ["Hi ALON-PH,", "", "I'd like to request a quotation for the following:", ""];
-    items.forEach((it, i) => lines.push(`${i + 1}. ${it.productName}${it.variantName ? " — " + it.variantName : ""}`, `   Qty: ${it.qty}${it.note ? "\n   Note: " + it.note : ""}`));
-    lines.push("", "Name: ", "Organization: ", "Contact number: ", "Event / needed by: ", "", "Thank you!");
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent("ALON-PH inquiry — quotation request")}&body=${encodeURIComponent(lines.join("\n"))}`;
+    sendInquiry(email, getItems());
   });
 
   render();

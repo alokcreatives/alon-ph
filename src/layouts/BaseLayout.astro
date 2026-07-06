@@ -24,5 +24,9 @@ const {
     <main><slot /></main>
     <Footer home={home} />
     <InquiryDrawer home={home} />
+    <script>
+      import { installMailtoFallback } from "../scripts/send-inquiry.js";
+      installMailtoFallback();
+    </script>
   </body>
 </html>
