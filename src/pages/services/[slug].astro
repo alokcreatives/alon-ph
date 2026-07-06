@@ -20,7 +20,7 @@ if (images.length === 0) images = [placeholderImage(`${service.tags} ${service.n
 
 const others = services.filter((s) => s.slug !== service.slug).slice(0, 4);
 ---
-<BaseLayout home={home} title={`${service.name} | ALON-PH Services`} description={service.desc}>
+<BaseLayout home={home} title={`${service.name} | ALOK Services`} description={service.desc}>
   <div class="container detail">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={`${base}services/`}>Services</a><span>/</span><b>{service.name}</b>

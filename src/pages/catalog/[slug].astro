@@ -46,7 +46,7 @@ const related = products
   .filter((p) => p.categoryId === product.categoryId && p.slug !== product.slug)
   .slice(0, 5);
 ---
-<BaseLayout home={home} title={`${product.name} | ALON-PH`} description={product.desc}>
+<BaseLayout home={home} title={`${product.name} | ALOK`} description={product.desc}>
   <div class="container detail">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={`${base}catalog/`}>Catalog</a>

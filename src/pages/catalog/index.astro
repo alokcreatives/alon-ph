@@ -6,7 +6,7 @@ import { getCatalog } from "../../lib/catalog.js";
 const { categories, products, home } = await getCatalog();
 const categoryById = new Map(categories.map((category) => [category.id, category]));
 ---
-<BaseLayout home={home} title="Catalog | ALON-PH" description="Browse customized event kits, merchandise, and giveaways.">
+<BaseLayout home={home} title="Catalog | ALOK" description="Browse customized event kits, merchandise, and giveaways.">
   <section class="catalog-hero">
     <div class="container">
       <h1>Product Catalog</h1>

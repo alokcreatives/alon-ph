@@ -277,7 +277,10 @@ const HOME_DEFAULTS = {
   collab_kicker: "LET'S CREATE MORE SUCCESS TOGETHER",
   collab_title: "Open for Collaborations",
   collab_subtitle: "We work with event organizers, schools, companies, and agencies.",
-  contact_email: "hello@alonph.com",
+  // Default email comes from the INQUIRY_EMAIL secret so the whole site (contact
+  // links, footer, inquiry send) uses one address. A Home-tab `contact_email`
+  // row still overrides this if set.
+  contact_email: clean(process.env.INQUIRY_EMAIL) || "hello@example.com",
   contact_phone: "0977 123 4567",
   contact_location: "Daraga, Albay, Philippines",
 };

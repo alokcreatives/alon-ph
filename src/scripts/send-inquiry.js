@@ -11,10 +11,10 @@
  * mail option fails.
  */
 
-const SUBJECT = "ALON-PH inquiry — quotation request";
+const SUBJECT = "ALOK inquiry — quotation request";
 
 export function buildBody(items) {
-  const lines = ["Hi ALON-PH,", "", "I'd like to request a quotation for the following:", ""];
+  const lines = ["Hi ALOK,", "", "I'd like to request a quotation for the following:", ""];
   items.forEach((it, i) => {
     lines.push(
       `${i + 1}. ${it.productName}${it.variantName ? " — " + it.variantName : ""}`,
@@ -147,7 +147,7 @@ export function installMailtoFallback() {
     const url = new URL(a.href);
     const email = decodeURIComponent(url.pathname);
     const params = url.searchParams;
-    const subject = params.get("subject") || "Inquiry — ALON-PH";
+    const subject = params.get("subject") || "Inquiry — ALOK";
     const body = params.get("body") || "";
     const before = Date.now();
     // Let the native mailto attempt fire, then check if we're still here.

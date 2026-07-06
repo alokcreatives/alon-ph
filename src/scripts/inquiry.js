@@ -2,7 +2,7 @@
  * Stored in localStorage; a custom "inquiry:changed" event keeps the
  * header badge and drawer in sync.
  */
-const KEY = "alon-ph:inquiry-list";
+const KEY = "alok:inquiry-list";
 
 export function getItems() {
   try {

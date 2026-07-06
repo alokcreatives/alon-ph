@@ -4,7 +4,7 @@ import { getCatalog } from "../lib/catalog.js";
 import { placeholderImage, uiIcon } from "../lib/icons.js";
 
 const { home, products, services } = await getCatalog();
-const inquiryEmail = home.contact_email || process.env.INQUIRY_EMAIL || "hello@alonph.com";
+const inquiryEmail = home.contact_email || process.env.INQUIRY_EMAIL || "hello@example.com";
 const base = import.meta.env.BASE_URL;
 
 // Map every possible inquiry id -> {image, url} so the page can show thumbnails.
@@ -22,7 +22,7 @@ for (const s of services) {
   };
 }
 ---
-<BaseLayout home={home} title="Inquiry List | ALON-PH" description="Review your inquiry list and send it for a quotation.">
+<BaseLayout home={home} title="Inquiry List | ALOK" description="Review your inquiry list and send it for a quotation.">
   <div class="container inquiry-page">
     <header class="page-head">
       <span class="eyebrow">QUOTE REQUEST</span>

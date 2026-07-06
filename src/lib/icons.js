@@ -79,9 +79,9 @@ export function uiIcon(name, size = 18) {
 }
 
 /* A branded placeholder image (data-URI) for products/services with no image.
- * Warm gradient + the matching category icon + "ALON-PH". Usable as <img src>.
+ * Warm gradient + the matching category icon + "ALOK". Usable as <img src>.
  */
-export function placeholderImage(name = "", label = "ALON-PH") {
+export function placeholderImage(name = "", label = "ALOK") {
   const body = I[key(name)] || I.gift;
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
     <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
